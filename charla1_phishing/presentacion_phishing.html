@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing y Engaños en Internet - Capacitación Ciberseguridad</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; overflow-x: hidden; }
+        .back-button { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 0.9rem; z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease; }
+        .back-button:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+        .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; text-align: center; color: white; }
+        .slide:nth-child(even) { background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); }
+        .slide:nth-child(odd) { background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); }
+        h1 { font-size: 3.5rem; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        h2 { font-size: 2.8rem; margin-bottom: 25px; color: #00d4ff; }
+        h3 { font-size: 2rem; margin-bottom: 20px; color: #ffd700; }
+        p { font-size: 1.4rem; line-height: 1.8; max-width: 900px; margin-bottom: 20px; }
+        .subtitle { font-size: 1.8rem; color: #00d4ff; margin-bottom: 40px; }
+        .icon-large { font-size: 6rem; margin-bottom: 30px; }
+        .card-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-top: 30px; }
+        .card { background: rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; width: 280px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-10px); }
+        .card-icon { font-size: 3rem; margin-bottom: 15px; }
+        .card h4 { font-size: 1.4rem; margin-bottom: 10px; color: #00d4ff; }
+        .card p { font-size: 1rem; }
+        .warning-box { background: linear-gradient(135deg, #ff6b6b, #ee5a24); padding: 30px 50px; border-radius: 15px; margin: 30px 0; max-width: 800px; }
+        .success-box { background: linear-gradient(135deg, #00b894, #00cec9); padding: 30px 50px; border-radius: 15px; margin: 30px 0; max-width: 800px; }
+        .example-email { background: #fff; color: #333; padding: 25px; border-radius: 10px; text-align: left; max-width: 700px; margin: 20px 0; font-size: 1rem; }
+        .example-email .header { border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px; }
+        .example-email .suspicious { color: #e74c3c; font-weight: bold; }
+        .example-email .from { color: #666; }
+        ul { text-align: left; font-size: 1.3rem; line-height: 2; max-width: 800px; }
+        ul li { margin-bottom: 10px; }
+        .video-container { background: rgba(0,0,0,0.3); padding: 40px; border-radius: 20px; margin: 20px 0; width: 100%; max-width: 1000px; }
+        .video-frame { width: 100%; height: 500px; border-radius: 15px; border: none; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .video-title { color: #ffd700; font-size: 1.5rem; margin-bottom: 25px; }
+        .stat-number { font-size: 5rem; font-weight: bold; color: #ff6b6b; }
+        .timeline { display: flex; flex-direction: column; gap: 20px; max-width: 800px; }
+        .timeline-item { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #00d4ff; }
+        .timeline-number { background: #00d4ff; color: #1a1a2e; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0; }
+        .checklist { text-align: left; max-width: 700px; }
+        .checklist-item { display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 10px; }
+        .cross { color: #e74c3c; font-size: 1.5rem; }
+        .footer-info { position: fixed; bottom: 20px; right: 30px; font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+        .nav-hint { position: fixed; bottom: 20px; left: 30px; font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+        .comparison-table { width: 100%; max-width: 900px; border-collapse: collapse; margin: 20px 0; }
+        .comparison-table th, .comparison-table td { padding: 15px; border: 1px solid rgba(255,255,255,0.2); }
+        .comparison-table th { background: rgba(0,212,255,0.3); }
+        .comparison-table .legit { background: rgba(0,184,148,0.2); }
+        .comparison-table .phish { background: rgba(255,107,107,0.2); }
+        .source-citation { font-size: 0.75rem; opacity: 0.6; margin-top: 8px; font-style: italic; }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } h2 { font-size: 2rem; } p { font-size: 1.1rem; } .card { width: 100%; } .back-button { padding: 8px 15px; font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">← Volver al Inicio</a>
+
+    <div class="slide">
+        <div class="icon-large">🎣</div>
+        <h1>PHISHING Y ENGAÑOS EN INTERNET</h1>
+        <p class="subtitle">Cómo Identificar y Protegerte de las Amenazas Digitales</p>
+        <p>Capacitación en Ciberseguridad</p>
+        <p style="margin-top: 40px; opacity: 0.7;">Duración: 30 minutos</p>
+    </div>
+
+    <div class="slide">
+        <h2>📋 Agenda de Hoy</h2>
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-number">1</div><div><strong>¿Qué es el Phishing?</strong><p>Definición y estadísticas actuales</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">2</div><div><strong>Tipos de Ataques</strong><p>Email, SMS, llamadas y más</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">3</div><div><strong>Señales de Alerta</strong><p>Cómo identificar un intento de phishing</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">4</div><div><strong>Casos Reales</strong><p>Ejemplos y análisis práctico</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">5</div><div><strong>Cómo Protegerse</strong><p>Mejores prácticas y recomendaciones</p></div></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>⚠️ La Realidad del Phishing</h2>
+        <div class="card-container">
+            <div class="card">
+                <div class="stat-number">36%</div>
+                <h4>de las brechas de datos</h4>
+                <p>tienen al phishing como vector de ataque inicial</p>
+                <p class="source-citation">Fuente: IBM Cost of Data Breach Report 2024</p>
+            </div>
+            <div class="card">
+                <div class="stat-number">3.4B</div>
+                <h4>correos maliciosos</h4>
+                <p>se envían diariamente en el mundo</p>
+                <p class="source-citation">Fuente: AAG-IT / Sprinto Phishing Statistics 2024</p>
+            </div>
+            <div class="card">
+                <div class="stat-number">989K</div>
+                <h4>ataques únicos</h4>
+                <p>detectados en Q4 2024 a nivel mundial</p>
+                <p class="source-citation">Fuente: Statista / APWG Q4 2024</p>
+            </div>
+        </div>
+        <p style="margin-top: 40px; color: #ff6b6b;">¡El phishing es una de las amenazas #1 en ciberseguridad!</p>
+    </div>
+
+    <div class="slide">
+        <h2>🎣 ¿Qué es el Phishing?</h2>
+        <p>El <strong style="color: #00d4ff;">phishing</strong> es una técnica de <strong>ingeniería social</strong> donde los atacantes se hacen pasar por entidades legítimas para engañarte y obtener:</p>
+        <div class="card-container" style="margin-top: 30px;">
+            <div class="card"><div class="card-icon">🔑</div><h4>Contraseñas</h4><p>Credenciales de acceso a tus cuentas</p></div>
+            <div class="card"><div class="card-icon">💳</div><h4>Datos Bancarios</h4><p>Números de tarjeta, CVV, cuentas</p></div>
+            <div class="card"><div class="card-icon">👤</div><h4>Información Personal</h4><p>DUI, datos personales, direcciones</p></div>
+            <div class="card"><div class="card-icon">💰</div><h4>Dinero</h4><p>Transferencias fraudulentas</p></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🎭 Tipos de Phishing</h2>
+        <div class="card-container">
+            <div class="card"><div class="card-icon">📧</div><h4>Email Phishing</h4><p>Correos electrónicos falsos que imitan bancos, empresas o servicios</p></div>
+            <div class="card"><div class="card-icon">📱</div><h4>Smishing (SMS)</h4><p>Mensajes de texto con enlaces maliciosos o solicitudes falsas</p></div>
+            <div class="card"><div class="card-icon">📞</div><h4>Vishing (Voz)</h4><p>Llamadas telefónicas haciéndose pasar por soporte técnico o bancos</p></div>
+            <div class="card"><div class="card-icon">🎯</div><h4>Spear Phishing</h4><p>Ataques personalizados dirigidos a personas específicas</p></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>📧 Ejemplo Real: Correo de Phishing</h2>
+        <div class="example-email">
+            <div class="header">
+                <p><span class="from">De:</span> <span class="suspicious">soporte@banc0-seguridad.com</span> ⚠️</p>
+                <p><span class="from">Asunto:</span> <span class="suspicious">¡URGENTE! Su cuenta será suspendida</span> ⚠️</p>
+            </div>
+            <p>Estimado cliente,</p>
+            <p>Hemos detectado <span class="suspicious">actividad sospechosa</span> en su cuenta. Para evitar la <span class="suspicious">suspensión inmediata</span>, debe verificar su identidad en las próximas <span class="suspicious">24 horas</span>.</p>
+            <p>Haga clic aquí para verificar: <span class="suspicious">www.banc0-verificar.xyz/login</span> ⚠️</p>
+            <p>Atentamente,<br>Equipo de Seguridad</p>
+        </div>
+        <div class="warning-box">
+            <h3>🚨 Señales de Alerta Identificadas:</h3>
+            <ul>
+                <li>Dominio sospechoso (banc0 con cero, no .com oficial)</li>
+                <li>Urgencia extrema para presionar</li>
+                <li>Enlace a sitio no oficial</li>
+                <li>Solicitud de "verificar" información</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🔍 Señales de Alerta</h2>
+        <div class="checklist">
+            <div class="checklist-item"><span class="cross">⚠️</span><span><strong>Urgencia extrema:</strong> "¡Actúa ahora!" "Tienes 24 horas"</span></div>
+            <div class="checklist-item"><span class="cross">⚠️</span><span><strong>Errores ortográficos y gramaticales</strong> en el mensaje</span></div>
+            <div class="checklist-item"><span class="cross">⚠️</span><span><strong>Direcciones de correo sospechosas:</strong> seguridad@banco-xyz.com</span></div>
+            <div class="checklist-item"><span class="cross">⚠️</span><span><strong>Enlaces que no coinciden</strong> con el sitio oficial</span></div>
+            <div class="checklist-item"><span class="cross">⚠️</span><span><strong>Solicitan información sensible</strong> por correo/mensaje</span></div>
+            <div class="checklist-item"><span class="cross">⚠️</span><span><strong>Ofertas demasiado buenas</strong> para ser verdad</span></div>
+            <div class="checklist-item"><span class="cross">⚠️</span><span><strong>Amenazas de consecuencias</strong> si no actúas</span></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>⚖️ Legítimo vs. Phishing</h2>
+        <table class="comparison-table">
+            <tr><th>Característica</th><th class="legit">✅ Correo Legítimo</th><th class="phish">❌ Phishing</th></tr>
+            <tr><td>Remitente</td><td class="legit">soporte@banco.com</td><td class="phish">soporte@banc0-seg.xyz</td></tr>
+            <tr><td>Saludo</td><td class="legit">Estimado Juan Pérez</td><td class="phish">Estimado cliente</td></tr>
+            <tr><td>Tono</td><td class="legit">Profesional, sin urgencia</td><td class="phish">¡URGENTE! ¡INMEDIATO!</td></tr>
+            <tr><td>Enlaces</td><td class="legit">https://www.banco.com</td><td class="phish">bit.ly/xyz123</td></tr>
+            <tr><td>Solicita datos</td><td class="legit">Nunca por correo</td><td class="phish">Contraseña, tarjeta</td></tr>
+        </table>
+    </div>
+
+    <div class="slide">
+        <h2>🛡️ Cómo Protegerte</h2>
+        <div class="card-container">
+            <div class="card"><div class="card-icon">🔍</div><h4>Verifica el Remitente</h4><p>Revisa la dirección de correo completa, no solo el nombre</p></div>
+            <div class="card"><div class="card-icon">🔗</div><h4>No Hagas Clic</h4><p>Pasa el cursor sobre enlaces para ver la URL real antes de hacer clic</p></div>
+            <div class="card"><div class="card-icon">📞</div><h4>Contacta Directamente</h4><p>Ante dudas, llama al número oficial de la empresa</p></div>
+            <div class="card"><div class="card-icon">🔐</div><h4>Usa 2FA</h4><p>Activa la autenticación de dos factores en todas tus cuentas</p></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🚨 ¿Qué Hacer si Caíste en Phishing?</h2>
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-number">1</div><div><strong>Cambia tus contraseñas inmediatamente</strong><p>Empieza por las cuentas más importantes (correo, banco)</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">2</div><div><strong>Contacta a tu banco</strong><p>Si diste información financiera, notifica de inmediato</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">3</div><div><strong>Activa alertas de seguridad</strong><p>Monitorea tus cuentas por actividad sospechosa</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">4</div><div><strong>Reporta el incidente</strong><p>Informa al departamento de TI y a las autoridades</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">5</div><div><strong>Aprende de la experiencia</strong><p>Identifica cómo fuiste engañado para no repetirlo</p></div></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🎬 Video 1: ¿Qué es el Phishing?</h2>
+        <div class="video-container">
+            <p class="video-title">Aprende qué es el phishing y cómo protegerte</p>
+            <iframe class="video-frame" src="https://www.youtube.com/embed/q2oC3XunbS0" title="Qué es el phishing" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🎬 Video 2: Tipos de Phishing</h2>
+        <div class="video-container">
+            <p class="video-title">Conoce los diferentes tipos de phishing y cómo evitarlos</p>
+            <iframe class="video-frame" src="https://www.youtube.com/embed/EHFRRmYDbYY" title="Tipos de Phishing" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🎬 Video 3: Cómo Evitar el Phishing</h2>
+        <div class="video-container">
+            <p class="video-title">Tips prácticos para no caer en ataques de phishing</p>
+            <iframe class="video-frame" src="https://www.youtube.com/embed/twcVjXDg9K8" title="Cómo evitar el Phishing" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>📝 Resumen: Recuerda Siempre</h2>
+        <div class="success-box">
+            <ul>
+                <li><strong>PIENSA</strong> antes de hacer clic en cualquier enlace</li>
+                <li><strong>VERIFICA</strong> la identidad del remitente</li>
+                <li><strong>DESCONFÍA</strong> de la urgencia y las amenazas</li>
+                <li><strong>NUNCA</strong> compartas contraseñas por correo o mensaje</li>
+                <li><strong>REPORTA</strong> los correos sospechosos</li>
+            </ul>
+        </div>
+        <p style="margin-top: 30px; font-size: 1.6rem; color: #00d4ff;">"Si algo parece demasiado bueno o demasiado urgente... ¡Probablemente es phishing!"</p>
+    </div>
+
+    <div class="slide">
+        <div class="icon-large">❓</div>
+        <h1>¿Preguntas?</h1>
+        <p class="subtitle">Es momento de resolver tus dudas</p>
+        <p style="margin-top: 50px;">¡Gracias por tu participación!</p>
+        <p style="margin-top: 20px; opacity: 0.7;">Material elaborado por: Matrix Agent</p>
+        <a href="../index.html" class="back-button" style="position: relative; margin-top: 30px;">← Volver al Inicio</a>
+    </div>
+
+    <div class="nav-hint">Desplázate hacia abajo para ver más diapositivas ↓</div>
+    <div class="footer-info">Charla 1: Phishing | NAVEGA SEGURO</div>
+</body>
+</html>

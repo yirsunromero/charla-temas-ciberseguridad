@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contraseñas Seguras y MFA - Capacitación Ciberseguridad</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); min-height: 100vh; overflow-x: hidden; }
+        .back-button { position: fixed; top: 20px; left: 20px; background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 0.9rem; z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease; }
+        .back-button:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+        .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; text-align: center; color: white; }
+        .slide:nth-child(even) { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); }
+        .slide:nth-child(odd) { background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%); }
+        h1 { font-size: 3.5rem; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        h2 { font-size: 2.8rem; margin-bottom: 25px; color: #ffd700; }
+        h3 { font-size: 2rem; margin-bottom: 20px; color: #00ff88; }
+        p { font-size: 1.4rem; line-height: 1.8; max-width: 900px; margin-bottom: 20px; }
+        .subtitle { font-size: 1.8rem; color: #ffd700; margin-bottom: 40px; }
+        .icon-large { font-size: 6rem; margin-bottom: 30px; }
+        .card-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-top: 30px; }
+        .card { background: rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; width: 280px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-10px); }
+        .card-icon { font-size: 3rem; margin-bottom: 15px; }
+        .card h4 { font-size: 1.4rem; margin-bottom: 10px; color: #ffd700; }
+        .card p { font-size: 1rem; }
+        .warning-box { background: linear-gradient(135deg, #ff6b6b, #ee5a24); padding: 30px 50px; border-radius: 15px; margin: 30px 0; max-width: 800px; }
+        .success-box { background: linear-gradient(135deg, #00b894, #00cec9); padding: 30px 50px; border-radius: 15px; margin: 30px 0; max-width: 800px; }
+        .password-example { background: #1a1a2e; padding: 25px; border-radius: 15px; font-family: 'Courier New', monospace; font-size: 2rem; margin: 15px 0; border: 2px solid #00b894; color: #00b894; }
+        ul { text-align: left; font-size: 1.3rem; line-height: 2; max-width: 800px; }
+        ul li { margin-bottom: 10px; }
+        .mfa-diagram { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap; }
+        .mfa-factor { background: rgba(255,255,255,0.15); padding: 30px; border-radius: 15px; text-align: center; min-width: 200px; }
+        .mfa-plus { font-size: 3rem; color: #ffd700; }
+        .video-container { background: rgba(0,0,0,0.3); padding: 40px; border-radius: 20px; margin: 20px 0; width: 100%; max-width: 1000px; }
+        .video-frame { width: 100%; height: 500px; border-radius: 15px; border: none; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .video-title { color: #00ff88; font-size: 1.5rem; margin-bottom: 25px; }
+        .stat-number { font-size: 4rem; font-weight: bold; color: #ffd700; }
+        .timeline { display: flex; flex-direction: column; gap: 20px; max-width: 800px; }
+        .timeline-item { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #ffd700; }
+        .timeline-number { background: #ffd700; color: #1a1a2e; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; flex-shrink: 0; }
+        .password-builder { background: rgba(0,0,0,0.3); padding: 30px; border-radius: 15px; margin: 20px 0; max-width: 800px; }
+        .password-rule { display: flex; align-items: center; gap: 15px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .check-icon { color: #00b894; font-size: 1.5rem; }
+        .manager-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 800px; margin: 30px 0; }
+        .manager-item { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; text-align: center; }
+        .footer-info { position: fixed; bottom: 20px; right: 30px; font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+        .nav-hint { position: fixed; bottom: 20px; left: 30px; font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+        .crack-time { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin: 30px 0; }
+        .crack-item { text-align: center; }
+        .crack-password { font-family: 'Courier New', monospace; font-size: 1.2rem; margin-bottom: 10px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 5px; }
+        .crack-time-value { font-size: 1.5rem; font-weight: bold; }
+        .instant { color: #e74c3c; }
+        .hours { color: #f39c12; }
+        .centuries { color: #00b894; }
+        .source-citation { font-size: 0.75rem; opacity: 0.6; margin-top: 8px; font-style: italic; }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } h2 { font-size: 2rem; } p { font-size: 1.1rem; } .card { width: 100%; } .mfa-diagram { flex-direction: column; } .back-button { padding: 8px 15px; font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">← Volver al Inicio</a>
+
+    <div class="slide">
+        <div class="icon-large">🔐</div>
+        <h1>CONTRASEÑAS SEGURAS Y AUTENTICACIÓN MULTIFACTOR</h1>
+        <p class="subtitle">Tu Primera Línea de Defensa</p>
+        <p>Capacitación en Ciberseguridad</p>
+        <p style="margin-top: 40px; opacity: 0.7;">Duración: 30 minutos</p>
+    </div>
+
+    <div class="slide">
+        <h2>📋 Agenda de Hoy</h2>
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-number">1</div><div><strong>La importancia de las contraseñas</strong><p>Por qué son tu primera defensa</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">2</div><div><strong>Anatomía de una contraseña segura</strong><p>Cómo crear claves indescifrables</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">3</div><div><strong>Gestores de contraseñas</strong><p>Tu bóveda digital personal</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">4</div><div><strong>Autenticación Multifactor (MFA)</strong><p>La capa extra de protección</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">5</div><div><strong>Mejores prácticas</strong><p>Hábitos de seguridad diarios</p></div></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>📊 La Realidad de las Contraseñas</h2>
+        <div class="card-container">
+            <div class="card">
+                <div class="stat-number">81%</div>
+                <h4>de las brechas</h4>
+                <p>son causadas por contraseñas débiles o robadas</p>
+                <p class="source-citation">Fuente: Verizon DBIR / LastPass 2024</p>
+            </div>
+            <div class="card">
+                <div class="stat-number">123456</div>
+                <h4>contraseña #1</h4>
+                <p>más usada en el mundo (¡no la uses!)</p>
+                <p class="source-citation">Fuente: NordPass Top 200 Passwords 2024</p>
+            </div>
+            <div class="card">
+                <div class="stat-number">94%</div>
+                <h4>de contraseñas</h4>
+                <p>son reutilizadas en múltiples cuentas</p>
+                <p class="source-citation">Fuente: Heimdal Security / Microsoft 2024</p>
+            </div>
+        </div>
+        <p style="margin-top: 40px; color: #ff6b6b;">¡Es hora de mejorar nuestras contraseñas!</p>
+    </div>
+
+    <div class="slide">
+        <h2>⚔️ Contraseñas: Débiles vs. Fuertes</h2>
+        <p>¿Cuánto tiempo tomaría descifrar estas contraseñas?</p>
+        <div class="crack-time">
+            <div class="crack-item"><div class="crack-password">123456</div><div class="crack-time-value instant">⚡ Instantáneo</div></div>
+            <div class="crack-item"><div class="crack-password">password</div><div class="crack-time-value instant">⚡ Instantáneo</div></div>
+            <div class="crack-item"><div class="crack-password">Carlos2024</div><div class="crack-time-value hours">⏱️ 3 horas</div></div>
+            <div class="crack-item"><div class="crack-password">M1C@sa#Azul</div><div class="crack-time-value centuries">📅 400 años</div></div>
+            <div class="crack-item"><div class="crack-password">$Tr0ng#P@ss2024!</div><div class="crack-time-value centuries">🔒 34,000 años</div></div>
+        </div>
+        <p class="source-citation">Estimaciones basadas en: Security.org Password Strength Calculator</p>
+    </div>
+
+    <div class="slide">
+        <h2>🔬 Anatomía de una Contraseña Segura</h2>
+        <div class="password-builder">
+            <div class="password-rule"><span class="check-icon">✓</span><span><strong>Mínimo 12 caracteres</strong> - Mientras más larga, mejor</span></div>
+            <div class="password-rule"><span class="check-icon">✓</span><span><strong>Letras mayúsculas</strong> - A, B, C, D...</span></div>
+            <div class="password-rule"><span class="check-icon">✓</span><span><strong>Letras minúsculas</strong> - a, b, c, d...</span></div>
+            <div class="password-rule"><span class="check-icon">✓</span><span><strong>Números</strong> - 0, 1, 2, 3...</span></div>
+            <div class="password-rule"><span class="check-icon">✓</span><span><strong>Símbolos especiales</strong> - @, #, $, %, &, !</span></div>
+            <div class="password-rule"><span class="check-icon">✓</span><span><strong>Sin información personal</strong> - No usar nombre, fecha de nacimiento</span></div>
+        </div>
+        <div class="password-example">M1C0ntr@señ@_Segur@2024!</div>
+    </div>
+
+    <div class="slide">
+        <h2>💡 Técnica: Frase Secreta (Passphrase)</h2>
+        <p>Crea contraseñas memorables pero seguras usando frases:</p>
+        <div style="margin: 30px 0;"><h3>Paso 1: Piensa en una frase</h3><p>"Mi café favorito lo tomo a las 7 de la mañana"</p></div>
+        <div style="margin: 30px 0;"><h3>Paso 2: Toma las iniciales</h3><p>McfltaL7dlm</p></div>
+        <div style="margin: 30px 0;"><h3>Paso 3: Agrega símbolos y números</h3><div class="password-example">Mcf!tA_L@7dlm#</div></div>
+        <p style="color: #00ff88; margin-top: 20px;">¡Fácil de recordar, difícil de hackear!</p>
+    </div>
+
+    <div class="slide">
+        <h2>🚫 Lo Que NUNCA Debes Hacer</h2>
+        <div class="warning-box">
+            <ul>
+                <li>❌ Usar "123456", "password" o "qwerty"</li>
+                <li>❌ Incluir tu nombre, fecha de nacimiento o datos personales</li>
+                <li>❌ Usar la misma contraseña en múltiples sitios</li>
+                <li>❌ Escribir contraseñas en papeles pegados al monitor</li>
+                <li>❌ Compartir tus contraseñas con otros</li>
+                <li>❌ Guardar contraseñas en notas del teléfono sin cifrar</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🗄️ Gestores de Contraseñas</h2>
+        <p>Herramientas que almacenan y generan contraseñas seguras de forma cifrada</p>
+        <div class="card-container">
+            <div class="card"><div class="card-icon">🔐</div><h4>Una contraseña maestra</h4><p>Solo necesitas recordar una contraseña para acceder a todas</p></div>
+            <div class="card"><div class="card-icon">🎲</div><h4>Genera contraseñas</h4><p>Crea contraseñas aleatorias ultra seguras automáticamente</p></div>
+            <div class="card"><div class="card-icon">🔄</div><h4>Sincronización</h4><p>Accede desde cualquier dispositivo de forma segura</p></div>
+        </div>
+        <div class="manager-grid" style="margin-top: 40px;">
+            <div class="manager-item"><h4>Bitwarden</h4><p>Gratuito y código abierto</p></div>
+            <div class="manager-item"><h4>1Password</h4><p>Muy completo</p></div>
+            <div class="manager-item"><h4>LastPass</h4><p>Popular y fácil</p></div>
+            <div class="manager-item"><h4>Keeper</h4><p>Empresarial</p></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🛡️ ¿Qué es la Autenticación Multifactor (MFA)?</h2>
+        <p>Es un método de seguridad que requiere <strong>dos o más formas de verificación</strong> para acceder a una cuenta</p>
+        <div class="mfa-diagram">
+            <div class="mfa-factor"><div style="font-size: 3rem;">🧠</div><h4>Algo que SABES</h4><p>Contraseña, PIN</p></div>
+            <div class="mfa-plus">+</div>
+            <div class="mfa-factor"><div style="font-size: 3rem;">📱</div><h4>Algo que TIENES</h4><p>Teléfono, token</p></div>
+            <div class="mfa-plus">+</div>
+            <div class="mfa-factor"><div style="font-size: 3rem;">👆</div><h4>Algo que ERES</h4><p>Huella, rostro</p></div>
+        </div>
+        <div class="success-box" style="margin-top: 20px;"><p>🛡️ Con MFA activado, aunque alguien robe tu contraseña, no podrá acceder sin el segundo factor</p></div>
+    </div>
+
+    <div class="slide">
+        <h2>📲 Tipos de Autenticación Multifactor</h2>
+        <div class="card-container">
+            <div class="card"><div class="card-icon">📱</div><h4>Código SMS</h4><p>Recibes un código por mensaje de texto (menos seguro)</p></div>
+            <div class="card"><div class="card-icon">🔑</div><h4>App Autenticadora</h4><p>Google Authenticator, Microsoft Authenticator (recomendado)</p></div>
+            <div class="card"><div class="card-icon">🔐</div><h4>Llave Física</h4><p>Dispositivo USB como YubiKey (muy seguro)</p></div>
+            <div class="card"><div class="card-icon">👆</div><h4>Biometría</h4><p>Huella dactilar, reconocimiento facial</p></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>⚙️ Cómo Activar MFA</h2>
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-number">1</div><div><strong>Descarga una app autenticadora</strong><p>Google Authenticator o Microsoft Authenticator</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">2</div><div><strong>Ve a configuración de seguridad</strong><p>En tu cuenta de correo, banco, redes sociales, etc.</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">3</div><div><strong>Busca "Verificación en dos pasos" o "2FA"</strong><p>Activa la opción de autenticación adicional</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">4</div><div><strong>Escanea el código QR</strong><p>Con tu app autenticadora</p></div></div>
+            <div class="timeline-item"><div class="timeline-number">5</div><div><strong>¡Guarda los códigos de respaldo!</strong><p>En caso de perder tu teléfono</p></div></div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🎬 Video 1: ¿Qué es MFA?</h2>
+        <div class="video-container">
+            <p class="video-title">Aprende qué es la Autenticación Multifactor y cómo usarla</p>
+            <iframe class="video-frame" src="https://www.youtube.com/embed/xkxYPon37eY" title="Qué es MFA" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🎬 Video 2: Verificación en Dos Pasos</h2>
+        <div class="video-container">
+            <p class="video-title">Cómo proteger tus cuentas con verificación de dos pasos</p>
+            <iframe class="video-frame" src="https://www.youtube.com/embed/jHH8qsTlTgo" title="Verificación de dos pasos" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>🎬 Video 3: Tips para Contraseñas</h2>
+        <div class="video-container">
+            <p class="video-title">8 consejos para crear la contraseña perfecta</p>
+            <iframe class="video-frame" src="https://www.youtube.com/embed/zS2T9IY-_Z0" title="Tips para contraseñas" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>✅ Mejores Prácticas</h2>
+        <div class="success-box">
+            <ul>
+                <li>✅ Usa contraseñas únicas para cada cuenta</li>
+                <li>✅ Activa MFA en todas las cuentas importantes</li>
+                <li>✅ Utiliza un gestor de contraseñas</li>
+                <li>✅ Cambia contraseñas cada 3-6 meses en cuentas críticas</li>
+                <li>✅ Nunca compartas tus contraseñas</li>
+                <li>✅ Verifica si tus credenciales han sido expuestas en haveibeenpwned.com</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide">
+        <h2>📝 Resumen: Recuerda Siempre</h2>
+        <div class="card-container">
+            <div class="card"><div class="card-icon">🔐</div><h4>Contraseña Fuerte</h4><p>Mínimo 12 caracteres, mayúsculas, minúsculas, números y símbolos</p></div>
+            <div class="card"><div class="card-icon">🔄</div><h4>Una por Cuenta</h4><p>Nunca reutilices contraseñas entre diferentes servicios</p></div>
+            <div class="card"><div class="card-icon">🗄️</div><h4>Usa un Gestor</h4><p>Bitwarden, 1Password u otro para manejar tus contraseñas</p></div>
+            <div class="card"><div class="card-icon">🛡️</div><h4>Activa MFA</h4><p>La segunda capa de protección es esencial</p></div>
+        </div>
+        <p style="margin-top: 30px; font-size: 1.6rem; color: #ffd700;">"Tu contraseña es la llave de tu vida digital. ¡Protégela!"</p>
+    </div>
+
+    <div class="slide">
+        <div class="icon-large">❓</div>
+        <h1>¿Preguntas?</h1>
+        <p class="subtitle">Es momento de resolver tus dudas</p>
+        <p style="margin-top: 50px;">¡Gracias por tu participación!</p>
+        <p style="margin-top: 20px; opacity: 0.7;">Material elaborado por: Matrix Agent</p>
+        <a href="../index.html" class="back-button" style="position: relative; margin-top: 30px;">← Volver al Inicio</a>
+    </div>
+
+    <div class="nav-hint">Desplázate hacia abajo para ver más diapositivas ↓</div>
+    <div class="footer-info">Charla 2: Contraseñas y MFA | NAVEGA SEGURO</div>
+</body>
+</html>

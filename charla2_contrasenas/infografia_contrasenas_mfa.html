@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Contraseñas Seguras y MFA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .infographic {
+            width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            padding: 40px;
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .header h1 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .header .icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #00ff88;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            font-size: 1.8rem;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .stat-item {
+            padding: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .password-comparison {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .password-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            border-radius: 10px;
+        }
+
+        .password-row.weak {
+            background: rgba(231,76,60,0.2);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .password-row.medium {
+            background: rgba(243,156,18,0.2);
+            border-left: 4px solid #f39c12;
+        }
+
+        .password-row.strong {
+            background: rgba(0,184,148,0.2);
+            border-left: 4px solid #00b894;
+        }
+
+        .password-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+
+        .password-time {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .rule-icon {
+            font-size: 1.3rem;
+            color: #00ff88;
+        }
+
+        .mfa-section {
+            background: rgba(255,215,0,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+        }
+
+        .mfa-factors {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .factor {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .factor .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .factor h4 {
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .factor p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .plus-sign {
+            font-size: 2rem;
+            color: #ffd700;
+        }
+
+        .managers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .manager-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .manager-item h4 {
+            color: #00ff88;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .manager-item p {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .dont-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .dont-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,107,107,0.15);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .dont-item .icon {
+            color: #ff6b6b;
+        }
+
+        .do-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .do-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0,184,148,0.15);
+            padding: 12px 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00b894;
+        }
+
+        .do-item .icon {
+            color: #00b894;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .footer .motto {
+            font-size: 1.2rem;
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer .credits {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .infographic {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,215,0,0.9);
+            color: #1a1a2e;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background: rgba(255,215,0,1);
+            transform: scale(1.05);
+        }
+        .source-citation {
+            font-size: 0.65rem;
+            opacity: 0.6;
+            margin-top: 3px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">← Volver al Inicio</a>
+    <div class="infographic">
+        <div class="header">
+            <div class="icon">🔐</div>
+            <h1>CONTRASEÑAS SEGURAS + MFA</h1>
+            <p>Tu primera y segunda línea de defensa digital</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📊</span>
+                ¿POR QUÉ IMPORTAN LAS CONTRASEÑAS?
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">81%</div>
+                    <div class="stat-label">de brechas por<br>contraseñas débiles</div>
+                    <div class="source-citation">Verizon DBIR 2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">reutilizan la<br>misma contraseña</div>
+                    <div class="source-citation">Heimdal 2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">123456</div>
+                    <div class="stat-label">contraseña más<br>usada en el mundo</div>
+                    <div class="source-citation">NordPass 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">⏱️</span>
+                TIEMPO PARA DESCIFRAR
+            </div>
+            <div class="password-comparison">
+                <div class="password-row weak">
+                    <span class="password-text">123456</span>
+                    <span class="password-time" style="color:#e74c3c;">⚡ Instantáneo</span>
+                </div>
+                <div class="password-row weak">
+                    <span class="password-text">password</span>
+                    <span class="password-time" style="color:#e74c3c;">⚡ Instantáneo</span>
+                </div>
+                <div class="password-row medium">
+                    <span class="password-text">Carlos2024</span>
+                    <span class="password-time" style="color:#f39c12;">⏱️ 3 horas</span>
+                </div>
+                <div class="password-row strong">
+                    <span class="password-text">M1C@sa#Azul!</span>
+                    <span class="password-time" style="color:#00b894;">📅 400 años</span>
+                </div>
+                <div class="password-row strong">
+                    <span class="password-text">$Tr0ng#P@ss2024!</span>
+                    <span class="password-time" style="color:#00b894;">🔒 34,000 años</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">✅</span>
+                REGLAS PARA CONTRASEÑAS SEGURAS
+            </div>
+            <div class="rules-grid">
+                <div class="rule-item">
+                    <span class="rule-icon">📏</span>
+                    <span>Mínimo 12 caracteres</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🔠</span>
+                    <span>Mayúsculas (A, B, C)</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🔡</span>
+                    <span>Minúsculas (a, b, c)</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🔢</span>
+                    <span>Números (0, 1, 2, 3)</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">@#</span>
+                    <span>Símbolos (@, #, $, %)</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-icon">🚫</span>
+                    <span>Sin datos personales</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🛡️</span>
+                AUTENTICACIÓN MULTIFACTOR (MFA)
+            </div>
+            <div class="mfa-section">
+                <p style="text-align: center; margin-bottom: 15px;">Combina dos o más factores para mayor seguridad:</p>
+                <div class="mfa-factors">
+                    <div class="factor">
+                        <div class="icon">🧠</div>
+                        <h4>SABES</h4>
+                        <p>Contraseña, PIN</p>
+                    </div>
+                    <div class="plus-sign">+</div>
+                    <div class="factor">
+                        <div class="icon">📱</div>
+                        <h4>TIENES</h4>
+                        <p>Teléfono, Token</p>
+                    </div>
+                    <div class="plus-sign">+</div>
+                    <div class="factor">
+                        <div class="icon">👆</div>
+                        <h4>ERES</h4>
+                        <p>Huella, Rostro</p>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #00ff88; font-weight: bold;">
+                    ¡Con MFA, aunque roben tu contraseña, no podrán entrar!
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🗄️</span>
+                GESTORES DE CONTRASEÑAS RECOMENDADOS
+            </div>
+            <div class="managers-grid">
+                <div class="manager-item">
+                    <h4>Bitwarden</h4>
+                    <p>Gratis y seguro</p>
+                </div>
+                <div class="manager-item">
+                    <h4>1Password</h4>
+                    <p>Muy completo</p>
+                </div>
+                <div class="manager-item">
+                    <h4>LastPass</h4>
+                    <p>Popular</p>
+                </div>
+                <div class="manager-item">
+                    <h4>Keeper</h4>
+                    <p>Empresarial</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🚫</span>
+                LO QUE NUNCA DEBES HACER
+            </div>
+            <div class="dont-list">
+                <div class="dont-item">
+                    <span class="icon">❌</span>
+                    <span>Usar "123456" o "password"</span>
+                </div>
+                <div class="dont-item">
+                    <span class="icon">❌</span>
+                    <span>Repetir contraseñas</span>
+                </div>
+                <div class="dont-item">
+                    <span class="icon">❌</span>
+                    <span>Escribirlas en papeles</span>
+                </div>
+                <div class="dont-item">
+                    <span class="icon">❌</span>
+                    <span>Compartirlas con otros</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">💡</span>
+                MEJORES PRÁCTICAS
+            </div>
+            <div class="do-list">
+                <div class="do-item">
+                    <span class="icon">✓</span>
+                    <span>Una contraseña única por cada cuenta</span>
+                </div>
+                <div class="do-item">
+                    <span class="icon">✓</span>
+                    <span>Activa MFA en todas las cuentas importantes</span>
+                </div>
+                <div class="do-item">
+                    <span class="icon">✓</span>
+                    <span>Usa un gestor de contraseñas confiable</span>
+                </div>
+                <div class="do-item">
+                    <span class="icon">✓</span>
+                    <span>Verifica tus datos en haveibeenpwned.com</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="motto">"Tu contraseña es la llave de tu vida digital. ¡Hazla fuerte!"</div>
+            <div class="credits">
+                Material elaborado por: Matrix Agent
+            </div>
+        </div>
+    </div>
+</body>
+</html>

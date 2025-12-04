@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural Reflexivo - Charla 1: Phishing</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; padding: 30px; }
+        .mural-container { max-width: 1400px; margin: 0 auto; }
+        .mural-header { text-align: center; color: white; margin-bottom: 40px; }
+        .mural-header h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); color: #00d4ff; }
+        .mural-header p { font-size: 1.3rem; opacity: 0.9; }
+        .mural-board { background: #f5e6d3; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); background-image: linear-gradient(90deg, rgba(200,200,200,0.1) 1px, transparent 1px), linear-gradient(rgba(200,200,200,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+        .mural-title { text-align: center; margin-bottom: 40px; }
+        .mural-title h2 { font-size: 2rem; color: #333; display: inline-block; background: #00d4ff; color: white; padding: 15px 40px; border-radius: 10px; transform: rotate(-1deg); box-shadow: 3px 3px 10px rgba(0,0,0,0.2); }
+        .sticky-notes-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .sticky-note { padding: 25px; border-radius: 5px; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); transform: rotate(var(--rotation)); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; }
+        .sticky-note:hover { transform: rotate(0deg) scale(1.05); box-shadow: 10px 10px 25px rgba(0,0,0,0.2); z-index: 10; }
+        .sticky-note::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 15px; background: rgba(0,0,0,0.1); border-radius: 0 0 5px 5px; }
+        .sticky-note.yellow { background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); --rotation: -2deg; }
+        .sticky-note.pink { background: linear-gradient(135deg, #f8bbd9 0%, #f48fb1 100%); --rotation: 1deg; }
+        .sticky-note.blue { background: linear-gradient(135deg, #b3e5fc 0%, #81d4fa 100%); --rotation: -1deg; }
+        .sticky-note.green { background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%); --rotation: 2deg; }
+        .sticky-note.orange { background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%); --rotation: -1.5deg; }
+        .sticky-note.purple { background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%); --rotation: 1.5deg; }
+        .sticky-note.red { background: linear-gradient(135deg, #ffcdd2 0%, #ef9a9a 100%); --rotation: -0.5deg; }
+        .sticky-note h3 { font-size: 1.2rem; color: #333; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .sticky-note h3 .icon { font-size: 1.5rem; }
+        .sticky-note p, .sticky-note ul { color: #444; font-size: 0.95rem; line-height: 1.6; }
+        .sticky-note ul { padding-left: 20px; }
+        .sticky-note li { margin-bottom: 8px; }
+        .center-piece { grid-column: span 2; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white; text-align: center; --rotation: 0deg; }
+        .center-piece h3 { color: white; font-size: 1.5rem; justify-content: center; }
+        .center-piece p { color: rgba(255,255,255,0.95); font-size: 1.1rem; }
+        .reflection-quote { font-style: italic; font-size: 1.3rem; margin-top: 15px; color: #ffd700; }
+        .commitment-section { margin-top: 40px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .commitment-section h3 { text-align: center; color: #333; margin-bottom: 25px; font-size: 1.5rem; }
+        .commitments { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .commitment-badge { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 12px 25px; border-radius: 25px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); }
+        .footer { text-align: center; margin-top: 30px; color: white; }
+        .footer p { opacity: 0.8; }
+        .back-button { position: fixed; top: 20px; left: 20px; background: rgba(0,212,255,0.95); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 0.9rem; z-index: 1000; border: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: bold; }
+        .back-button:hover { background: #00d4ff; transform: scale(1.05); }
+        @media (max-width: 768px) { .center-piece { grid-column: span 1; } .mural-header h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Volver al Inicio</a>
+    <div class="mural-container">
+        <div class="mural-header">
+            <h1>🎣 MURAL REFLEXIVO: PHISHING</h1>
+            <p>¿Qué aprendí sobre Phishing y Engaños en Internet?</p>
+        </div>
+
+        <div class="mural-board">
+            <div class="mural-title">
+                <h2>📌 CHARLA 1: PHISHING Y ENGAÑOS</h2>
+            </div>
+
+            <div class="sticky-notes-container">
+                <div class="sticky-note yellow">
+                    <h3><span class="icon">🎣</span> ¿Qué es el Phishing?</h3>
+                    <ul>
+                        <li>Técnica de <strong>ingeniería social</strong> para robar datos</li>
+                        <li>Los atacantes se hacen pasar por entidades legítimas</li>
+                        <li>Buscan robar contraseñas, datos bancarios y dinero</li>
+                        <li>El nombre viene de "fishing" (pescar) porque lanzan anzuelos</li>
+                        <li>Es una de las amenazas más comunes en ciberseguridad</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note pink">
+                    <h3><span class="icon">📧</span> Email Phishing</h3>
+                    <ul>
+                        <li>Correos electrónicos que imitan empresas reales</li>
+                        <li>Logos y diseño que parecen auténticos</li>
+                        <li>Enlaces a sitios web falsos</li>
+                        <li>Solicitan "verificar" o "actualizar" datos</li>
+                        <li>El 36% de las brechas involucran phishing (IBM 2024)</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note blue">
+                    <h3><span class="icon">📱</span> Smishing (SMS)</h3>
+                    <ul>
+                        <li>Phishing a través de mensajes de texto</li>
+                        <li>Mensajes sobre paquetes no entregados</li>
+                        <li>Alertas falsas de bancos o servicios</li>
+                        <li>Enlaces acortados sospechosos (bit.ly, etc.)</li>
+                        <li>Muy común en WhatsApp y Telegram</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note green">
+                    <h3><span class="icon">📞</span> Vishing (Llamadas)</h3>
+                    <ul>
+                        <li>Llamadas haciéndose pasar por soporte técnico</li>
+                        <li>"Su computadora tiene un virus"</li>
+                        <li>"Somos del banco, detectamos actividad sospechosa"</li>
+                        <li>Piden acceso remoto o información sensible</li>
+                        <li>Usan tácticas de miedo y urgencia</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note center-piece">
+                    <h3><span class="icon">🚨</span> SEÑALES DE ALERTA QUE NUNCA OLVIDARÉ</h3>
+                    <p>1. <strong>URGENCIA EXTREMA:</strong> "¡Actúa ahora o perderás tu cuenta!"</p>
+                    <p>2. <strong>ERRORES ORTOGRÁFICOS:</strong> Mensajes con faltas en comunicaciones "oficiales"</p>
+                    <p>3. <strong>REMITENTES SOSPECHOSOS:</strong> banc0-segur1dad@xyz.com</p>
+                    <p>4. <strong>ENLACES EXTRAÑOS:</strong> URLs que no coinciden con el sitio oficial</p>
+                    <p>5. <strong>SOLICITAN CONTRASEÑAS:</strong> Ninguna empresa legítima las pide por correo</p>
+                    <p class="reflection-quote">"Si parece demasiado urgente o demasiado bueno... ¡probablemente es phishing!"</p>
+                </div>
+
+                <div class="sticky-note orange">
+                    <h3><span class="icon">🎯</span> Spear Phishing</h3>
+                    <ul>
+                        <li>Ataques personalizados y dirigidos</li>
+                        <li>El atacante investiga a su víctima</li>
+                        <li>Conoce tu nombre, trabajo, contactos</li>
+                        <li>Mensajes muy convincentes y específicos</li>
+                        <li>Usado contra ejecutivos y personas importantes</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note purple">
+                    <h3><span class="icon">🔍</span> Cómo Verificar URLs</h3>
+                    <ul>
+                        <li>Pasar el cursor sobre el enlace SIN hacer clic</li>
+                        <li>Verificar que sea HTTPS (candado verde)</li>
+                        <li>Revisar el dominio completo (banco.com vs banc0.xyz)</li>
+                        <li>Escribir la URL manualmente en el navegador</li>
+                        <li>Usar verificadores de URLs sospechosas</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note red">
+                    <h3><span class="icon">⚖️</span> Legítimo vs. Phishing</h3>
+                    <ul>
+                        <li><strong>Saludo:</strong> "Estimado Juan" vs "Estimado cliente"</li>
+                        <li><strong>Tono:</strong> Profesional vs ¡URGENTE!</li>
+                        <li><strong>Remitente:</strong> @banco.com vs @banc0-seg.xyz</li>
+                        <li><strong>Enlaces:</strong> Sitio oficial vs bit.ly/xyz123</li>
+                        <li><strong>Datos:</strong> Nunca piden vs Piden contraseña</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note yellow">
+                    <h3><span class="icon">🛡️</span> Cómo Protegerme</h3>
+                    <ul>
+                        <li>Verificar SIEMPRE el remitente completo</li>
+                        <li>No hacer clic en enlaces sospechosos</li>
+                        <li>Contactar directamente por canales oficiales</li>
+                        <li>Activar autenticación de dos factores (2FA)</li>
+                        <li>Mantener software y antivirus actualizados</li>
+                        <li>Reportar correos sospechosos</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note blue">
+                    <h3><span class="icon">🆘</span> Si Caí en Phishing...</h3>
+                    <ul>
+                        <li><strong>PASO 1:</strong> Cambiar contraseñas inmediatamente</li>
+                        <li><strong>PASO 2:</strong> Contactar al banco si di datos financieros</li>
+                        <li><strong>PASO 3:</strong> Activar alertas de seguridad</li>
+                        <li><strong>PASO 4:</strong> Reportar el incidente</li>
+                        <li><strong>PASO 5:</strong> Aprender para no repetirlo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="commitment-section">
+                <h3>🎯 MIS COMPROMISOS CONTRA EL PHISHING</h3>
+                <div class="commitments">
+                    <div class="commitment-badge"><span>✅</span> Pensaré dos veces antes de hacer clic</div>
+                    <div class="commitment-badge"><span>✅</span> Verificaré el remitente de cada correo</div>
+                    <div class="commitment-badge"><span>✅</span> No confiaré en mensajes urgentes</div>
+                    <div class="commitment-badge"><span>✅</span> Nunca daré mi contraseña por correo</div>
+                    <div class="commitment-badge"><span>✅</span> Reportaré correos sospechosos</div>
+                    <div class="commitment-badge"><span>✅</span> Compartiré este conocimiento con otros</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Material elaborado por: Matrix Agent</p>
+        </div>
+    </div>
+</body>
+</html>

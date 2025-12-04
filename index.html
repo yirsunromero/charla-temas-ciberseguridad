@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAVEGA SEGURO - Material de Capacitación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .header .subtitle {
+            margin-top: 10px;
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .material-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .material-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: #e0e0e0;
+            color: #555;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .card-tag.charla1 {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .card-tag.charla2 {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .card-tag.general {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1.8rem;
+            margin: 50px 0 25px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .videos-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .videos-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: background 0.3s ease;
+        }
+
+        .video-item:hover {
+            background: #e0e0e0;
+        }
+
+        .video-icon {
+            background: #ff0000;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .material-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ NAVEGA SEGURO</h1>
+            <p>Material de Capacitación en Ciberseguridad</p>
+        </div>
+
+        <h2 class="section-title">📊 Presentaciones de las Charlas</h2>
+        <div class="materials-grid">
+            <div class="material-card">
+                <div class="card-icon">🎣</div>
+                <span class="card-tag charla1">Charla 1 - 30 min</span>
+                <h3 class="card-title">Phishing y Engaños en Internet</h3>
+                <p class="card-description">Aprende a identificar amenazas de phishing, tipos de ataques y cómo protegerte de la ingeniería social.</p>
+                <a href="charla1_phishing/presentacion_phishing.html" class="btn btn-primary">Ver Presentación</a>
+            </div>
+
+            <div class="material-card">
+                <div class="card-icon">🔐</div>
+                <span class="card-tag charla2">Charla 2 - 30 min</span>
+                <h3 class="card-title">Contraseñas Seguras y MFA</h3>
+                <p class="card-description">Crea contraseñas indescifrables, usa gestores de contraseñas y activa la autenticación multifactor.</p>
+                <a href="charla2_contrasenas/presentacion_contrasenas_mfa.html" class="btn btn-primary">Ver Presentación</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">📄 Infografías</h2>
+        <div class="materials-grid">
+            <div class="material-card">
+                <div class="card-icon">🎭</div>
+                <span class="card-tag charla1">Infografía</span>
+                <h3 class="card-title">No Muerdas el Anzuelo</h3>
+                <p class="card-description">Guía visual rápida sobre phishing: tipos, señales de alerta y cómo protegerte.</p>
+                <a href="charla1_phishing/infografia_phishing.html" class="btn btn-primary">Ver Infografía</a>
+            </div>
+
+            <div class="material-card">
+                <div class="card-icon">🔑</div>
+                <span class="card-tag charla2">Infografía</span>
+                <h3 class="card-title">Contraseñas + MFA</h3>
+                <p class="card-description">Todo lo que necesitas saber sobre contraseñas seguras y autenticación en una imagen.</p>
+                <a href="charla2_contrasenas/infografia_contrasenas_mfa.html" class="btn btn-primary">Ver Infografía</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">📝 Murales Reflexivos</h2>
+        <div class="materials-grid">
+            <div class="material-card">
+                <div class="card-icon">🎣</div>
+                <span class="card-tag charla1">Mural Charla 1</span>
+                <h3 class="card-title">Mural: Phishing</h3>
+                <p class="card-description">Reflexiones sobre phishing, tipos de ataques, señales de alerta y cómo protegerse de los engaños en internet.</p>
+                <a href="MURAL_CHARLA1_PHISHING.html" class="btn btn-primary">Ver Mural</a>
+            </div>
+
+            <div class="material-card">
+                <div class="card-icon">🔐</div>
+                <span class="card-tag charla2">Mural Charla 2</span>
+                <h3 class="card-title">Mural: Contraseñas y MFA</h3>
+                <p class="card-description">Reflexiones sobre contraseñas seguras, gestores, autenticación multifactor y mejores prácticas de seguridad.</p>
+                <a href="MURAL_CHARLA2_CONTRASENAS.html" class="btn btn-primary">Ver Mural</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">📋 Formularios de Evaluación</h2>
+        <div class="materials-grid">
+            <div class="material-card">
+                <div class="card-icon">📝</div>
+                <span class="card-tag general">Asistencia</span>
+                <h3 class="card-title">Registro de Asistencia</h3>
+                <p class="card-description">Formulario para registrar la asistencia a las capacitaciones.</p>
+                <a href="https://forms.gle/bUZ7JqnLwwC7R59BA" target="_blank" class="btn btn-primary">Abrir Formulario</a>
+            </div>
+
+            <div class="material-card">
+                <div class="card-icon">🎣</div>
+                <span class="card-tag charla1">Pre-Test</span>
+                <h3 class="card-title">Pre-Test: Charla 1</h3>
+                <p class="card-description">Evaluación ANTES de la charla sobre Phishing y Engaños en Internet.</p>
+                <a href="https://forms.gle/HKMLcdrTa5JGNpzJ8" target="_blank" class="btn btn-primary">Iniciar Pre-Test</a>
+            </div>
+
+            <div class="material-card">
+                <div class="card-icon">🎣</div>
+                <span class="card-tag charla1">Post-Test</span>
+                <h3 class="card-title">Post-Test: Charla 1</h3>
+                <p class="card-description">Evaluación DESPUÉS de la charla sobre Phishing y Engaños en Internet.</p>
+                <a href="https://forms.gle/VSkFBBL1baYxFAWeA" target="_blank" class="btn btn-primary">Iniciar Post-Test</a>
+            </div>
+
+            <div class="material-card">
+                <div class="card-icon">🔐</div>
+                <span class="card-tag charla2">Pre-Test</span>
+                <h3 class="card-title">Pre-Test: Charla 2</h3>
+                <p class="card-description">Evaluación ANTES de la charla sobre Contraseñas Seguras y MFA.</p>
+                <a href="https://forms.gle/NSxP2JaB4ZbERmaM9" target="_blank" class="btn btn-primary">Iniciar Pre-Test</a>
+            </div>
+
+            <div class="material-card">
+                <div class="card-icon">🔐</div>
+                <span class="card-tag charla2">Post-Test</span>
+                <h3 class="card-title">Post-Test: Charla 2</h3>
+                <p class="card-description">Evaluación DESPUÉS de la charla sobre Contraseñas Seguras y MFA.</p>
+                <a href="https://forms.gle/wNhxtWxwPNHE4vYRA" target="_blank" class="btn btn-primary">Iniciar Post-Test</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p style="margin-top: 10px;">Material elaborado por: Matrix Agent</p>
+        </div>
+    </div>
+</body>
+</html>

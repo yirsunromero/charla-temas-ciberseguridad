@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Phishing y Engaños en Internet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .infographic {
+            width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px;
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #00d4ff;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .header .icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            font-size: 1.8rem;
+        }
+
+        .definition-box {
+            background: rgba(0,212,255,0.15);
+            border-left: 4px solid #00d4ff;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .type-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .type-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .type-card h4 {
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+
+        .type-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .warning-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .warning-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,107,107,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .warning-item .icon {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+        }
+
+        .protection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .protection-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0,184,148,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00b894;
+        }
+
+        .protection-item .icon {
+            font-size: 1.5rem;
+            color: #00b894;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-number {
+            background: #ffd700;
+            color: #1a1a2e;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            background: rgba(255,255,255,0.05);
+            padding: 12px 20px;
+            border-radius: 10px;
+            flex-grow: 1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .footer .motto {
+            font-size: 1.3rem;
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer .credits {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .infographic {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,212,255,0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 1000;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .back-button:hover {
+            background: rgba(0,212,255,1);
+            transform: scale(1.05);
+        }
+        .source-citation {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">← Volver al Inicio</a>
+    <div class="infographic">
+        <div class="header">
+            <div class="icon">🎣</div>
+            <h1>PHISHING: NO MUERDAS EL ANZUELO</h1>
+            <p>Guía rápida para identificar y protegerte de los engaños en internet</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📖</span>
+                ¿QUÉ ES EL PHISHING?
+            </div>
+            <div class="definition-box">
+                Técnica de <strong>ingeniería social</strong> donde los atacantes se hacen pasar por entidades legítimas (bancos, empresas, servicios) para engañarte y robar tus datos personales, contraseñas y dinero.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📊</span>
+                ESTADÍSTICAS ALARMANTES
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">36%</div>
+                    <div class="stat-label">de brechas involucran<br>phishing</div>
+                    <div class="source-citation">IBM CDBR 2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3.4B</div>
+                    <div class="stat-label">correos maliciosos<br>enviados al día</div>
+                    <div class="source-citation">AAG-IT 2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">989K</div>
+                    <div class="stat-label">ataques únicos<br>detectados Q4 2024</div>
+                    <div class="source-citation">APWG 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🎭</span>
+                TIPOS DE PHISHING
+            </div>
+            <div class="types-grid">
+                <div class="type-card">
+                    <div class="icon">📧</div>
+                    <h4>Email Phishing</h4>
+                    <p>Correos falsos imitando empresas</p>
+                </div>
+                <div class="type-card">
+                    <div class="icon">📱</div>
+                    <h4>Smishing</h4>
+                    <p>Mensajes SMS fraudulentos</p>
+                </div>
+                <div class="type-card">
+                    <div class="icon">📞</div>
+                    <h4>Vishing</h4>
+                    <p>Llamadas telefónicas falsas</p>
+                </div>
+                <div class="type-card">
+                    <div class="icon">🎯</div>
+                    <h4>Spear Phishing</h4>
+                    <p>Ataques personalizados</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">⚠️</span>
+                SEÑALES DE ALERTA
+            </div>
+            <div class="warning-list">
+                <div class="warning-item">
+                    <span class="icon">🚨</span>
+                    <span><strong>Urgencia extrema:</strong> "¡Actúa ahora o perderás tu cuenta!"</span>
+                </div>
+                <div class="warning-item">
+                    <span class="icon">✏️</span>
+                    <span><strong>Errores ortográficos</strong> y gramaticales en el mensaje</span>
+                </div>
+                <div class="warning-item">
+                    <span class="icon">📧</span>
+                    <span><strong>Direcciones sospechosas:</strong> banco-seguro@xyz.com</span>
+                </div>
+                <div class="warning-item">
+                    <span class="icon">🔗</span>
+                    <span><strong>Enlaces extraños</strong> que no coinciden con el sitio oficial</span>
+                </div>
+                <div class="warning-item">
+                    <span class="icon">🔑</span>
+                    <span><strong>Solicitan contraseñas</strong> o datos bancarios por correo</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🛡️</span>
+                CÓMO PROTEGERTE
+            </div>
+            <div class="protection-list">
+                <div class="protection-item">
+                    <span class="icon">✓</span>
+                    <span>Verifica siempre la dirección del remitente</span>
+                </div>
+                <div class="protection-item">
+                    <span class="icon">✓</span>
+                    <span>No hagas clic en enlaces sospechosos</span>
+                </div>
+                <div class="protection-item">
+                    <span class="icon">✓</span>
+                    <span>Contacta directamente a la empresa por canales oficiales</span>
+                </div>
+                <div class="protection-item">
+                    <span class="icon">✓</span>
+                    <span>Activa la autenticación de dos factores (2FA)</span>
+                </div>
+                <div class="protection-item">
+                    <span class="icon">✓</span>
+                    <span>Mantén tu software y antivirus actualizados</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🆘</span>
+                ¿CAÍSTE EN PHISHING?
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">Cambia tus contraseñas inmediatamente</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">Contacta a tu banco si diste datos financieros</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">Activa alertas en tus cuentas</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">Reporta el incidente</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="motto">"Si parece sospechoso, probablemente lo es. ¡No muerdas el anzuelo!"</div>
+            <div class="credits">
+                Material elaborado por: Matrix Agent
+            </div>
+        </div>
+    </div>
+</body>
+</html>
